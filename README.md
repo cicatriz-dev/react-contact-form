@@ -1,4 +1,4 @@
-# Boilerplate project for educational content
+# React Contact Form
 
 ## Stack
 
