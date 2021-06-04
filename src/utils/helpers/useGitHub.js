@@ -1,29 +1,16 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { asyncGetUser } from '../../store/ducks/user';
 
 const useGitHub = (user) => {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = () => {
-      setIsLoading(true);
-      axios
-        .get(`https://api.github.com/users/${user}`)
-        .then((res) => {
-          setIsLoading(false);
-          setResponse(res.data);
-        })
-        .catch((err) => {
-          setError(err);
-          setIsLoading(false);
-        });
+      dispatch(asyncGetUser(user));
     };
     fetchData();
   }, []);
-
-  return { response, error, isLoading };
 };
 
 export default useGitHub;
