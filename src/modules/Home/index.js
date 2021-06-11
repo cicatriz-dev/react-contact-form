@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { useSelector } from 'react-redux';
-import Card from '../../utils/components/Card';
 import Header from '../../utils/components/Header';
 import useGitHub from '../../utils/helpers/useGitHub';
+import CardInfo from './components/CardInfo';
 
 const Home = () => {
   const userState = useSelector((state) => state.user);
@@ -16,7 +16,7 @@ const Home = () => {
       {!userState.isLoading && userState.user && (
         <div>
           <Header username={userState?.user?.name} />
-          <Card>Teste</Card>
+          <CardInfo user={userState?.user} />
         </div>
       )}
     </>

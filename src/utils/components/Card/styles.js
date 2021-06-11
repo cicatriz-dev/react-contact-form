@@ -6,4 +6,9 @@ export const Container = styled.div`
   box-shadow: 5px 6px 7px 7px rgba(0, 0, 0, 0.25);
   border-radius: 0px 50px;
   margin: 68px auto;
+
+  @media (min-width: 768px) {
+    width: 700px;
+    height: 600px;
+  }
 `;
