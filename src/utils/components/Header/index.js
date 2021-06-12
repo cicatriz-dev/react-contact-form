@@ -1,11 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledHeader, StyledTitle } from './styles';
+import { useLocation } from 'react-router-dom';
+import { StyledHeader, StyledLink, StyledTitle } from './styles';
+import useWidth from '../../helpers/useWidth';
 
 const Header = ({ username }) => {
+  const { width: componentWidth } = useWidth();
+  const location = useLocation();
   return (
     <StyledHeader>
-      <StyledTitle>{username}</StyledTitle>
+      {componentWidth < 768 ? (
+        <StyledTitle>{username}</StyledTitle>
+      ) : (
+        <div>
+          <StyledLink to="/" current={(location.pathname === '/').toString()}>
+            Sobre
+          </StyledLink>
+          <StyledLink to="/contato" current={(location.pathname === '/contato').toString()}>
+            Contato
+          </StyledLink>
+        </div>
+      )}
     </StyledHeader>
   );
 };
