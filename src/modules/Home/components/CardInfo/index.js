@@ -2,15 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from '../../../../utils/components/Card';
-import { BioContainer, Container, IconsWrapper, StyledButton, StyledImg } from './styles';
+import { BioContainer, Container, IconsWrapper, InfoWrapper, StyledImg } from './styles';
 import githubIcon from '../../../../utils/assets/Github.svg';
 import linkedinIcon from '../../../../utils/assets/Linkedin.svg';
+import Button from '../../../../utils/components/Button';
+import useWidth from '../../../../utils/helpers/useWidth';
 
 const CardInfo = ({ user }) => {
+  const { width } = useWidth();
   return (
     <Card>
       <Container>
-        <StyledImg src={user.avatar_url} alt="github profile" />
+        <InfoWrapper>
+          {width >= 768 && <h2>{user.name}</h2>}
+          <StyledImg src={user.avatar_url} alt="github profile" />
+        </InfoWrapper>
         <BioContainer>
           <p>{user.bio}</p>
           <IconsWrapper>
@@ -22,9 +28,11 @@ const CardInfo = ({ user }) => {
             </a>
           </IconsWrapper>
         </BioContainer>
-        <Link to="/contato">
-          <StyledButton type="button">Contato</StyledButton>
-        </Link>
+        {width < 768 && (
+          <Link to="/contato">
+            <Button type="button">Contato</Button>
+          </Link>
+        )}
       </Container>
     </Card>
   );
